@@ -14,9 +14,9 @@ stage ('sonarqube') {
 stage ('nexus'){
 sh "${mavenhome}/bin/mvn clean deploy"
 }
-stage ('tomcat') {
+/*stage ('tomcat') {
 sshagent(['a401de3b-164e-49aa-9983-d022d82fcbc0']) { 
  sh "scp -o StrictHostKeyChecking=No target/maven-web-application.war ec2-user@43.204.145.119:/opt/apache-tomcat-9.0.67/webapps/"
 }
-}
+}*
 }
