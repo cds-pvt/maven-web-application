@@ -1,0 +1,38 @@
+pipeline{
+  agent any
+  tools {
+  maven 'maven3.8.6'
+}
+//properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '5', daysToKeepStr: '5', numToKeepStr: '')), [$class: 'JobLocalConfiguration', changeReasonComment: '']])
+
+    stages{
+      stage ('git'){
+         steps{
+          git branch: 'development', credentialsId: '73b4678e-13da-4cba-bd9c-985c9a7ffeaa', url: 'https://github.com/cds-pvt/maven-web-application.git'
+}
+}
+      stage ('maven') {
+        steps{
+     sh 'mvn clean package'
+}
+}
+      stage ('sonarqube') {
+       steps{
+          sh 'mvn clean sonar:sonar'
+}
+}
+      stage ('nexus') {
+         steps {
+         sh 'mvn clean deploy'
+}
+}
+
+        stage ('tomcat') {
+        steps {
+        sshagent(['a401de3b-164e-49aa-9983-d022d82fcbc0']) { 
+ sh "scp -o StrictHostKeyChecking=No target/maven-web-application.war ec2-user@172.31.13.172:/opt/apache-tomcat-9.0.67/webapps/"
+}
+}
+}
+}//stages
+}// pipeline
