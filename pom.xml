@@ -98,13 +98,13 @@
 	    <repository>
 	      <id>nexus</id>
 	      <name>Mithun Technologies Releases Nexus Repository</name>
-	      <url>http://65.1.65.227:8087/repository/demo-realserepo/</url>
+	      <url>http://65.1.65.227:8087/repository/jenkins_relase/</url>
 	    </repository>
 	    
 	    <snapshotRepository>
 	      <id>nexus</id>
 	      <name>Mithun Technologies Snapshot Nexus Repository </name>
-	      <url>http://65.1.65.227:8087/repository/demo-sanpshotrepo/</url>
+	      <url>http://65.1.65.227:8087/repository/jenkins_snapshot/</url>
 	    </snapshotRepository>
 	    
 	</distributionManagement>
